@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+<div style ='width:50%; margin:auto;'>
+
+    
+        <div style="width: 50%; margin:auto;">
+
+            {% if messages %}
+            
+                {% for m in messages  %}
+                
+                {{m}}
+                {% endfor %}
+            {% endif %}
+
+        </div>
+
+
+    <form method = 'POST'>
+        {% csrf_token %}
+        <!--{{form|crispy}}-->
+
+
+
+        {% if form.non_fields_errors %}
+        
+        
+            {% for er in form.non_fields_errors  %}
+            
+                {{er}}
+
+            {% endfor %}
+
+        {% endif %}
+
+
+        {% if form %}
+    
+            {% for fm in form  %}
+            
+                {{fm.label_tag}}
+
+                {{fm}}
+                
+                {{fm|striptags}}       
+    
+            {% endfor %}
+        
+        {% endif %}
+    
+        <br>
+        <button type='submit' class="btn btn-primary" >Submit</button>
+    
+    </form>
+
+</div>
+
+
+{% endblock content %}
